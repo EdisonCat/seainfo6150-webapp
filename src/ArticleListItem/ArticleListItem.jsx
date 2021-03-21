@@ -1,29 +1,43 @@
-import React from "react";
-import { useHistory } from "react-router-dom";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import ArticleTextToggleButton from "../ArticleTextToggleButton/ArticleTextToggleButton";
+import styles from "./ArticleListItem.module.css";
 export default function ArticleListItem(props) {
-	const history = useHistory();
-	const handleClick = (e) => {
+	const [buttonText, setButtonText] = useState("Show more");
+	const [show, setShow] = useState(false);
+
+	const handleButtonToggle = (e) => {
 		e.preventDefault();
-		history.push({
-			pathname: "/articlelist/" + props.article.slug,
-		});
+		e.stopPropagation();
+		if (buttonText === "Show more") setButtonText("Show less");
+		else setButtonText("Show more");
+		setShow(!show);
 	};
+
 	return (
-		<div
-			onClick={(e) => handleClick(e)}
-			style={{
-				margin: "10px",
-				padding: "20px",
-				border: "2px black solid",
-				cursor: "pointer",
-				borderRadius: "10px",
-			}}
-		>
-			<h1>• {props.article.title}</h1>
-			<time>{props.article.displayDate}</time>
+		<div className className={styles.item}>
+			<Link
+				to={"/articlelist/" + props.article.slug}
+				className={styles.link}
+			>
+				{props.article.title}
+			</Link>
+			{show && (
+				<div>
+					<br />
+					<time className={styles.time} datetime={props.article.timeStamp}>{props.article.displayDate}</time>
+					<br />
+					<br />
+					<label>{props.article.shortText}</label>
+				</div>
+			)}
 			<br />
 			<br />
-			<label>{props.article.shortText}</label>
+			<ArticleTextToggleButton
+				buttonText={buttonText}
+				onClick={handleButtonToggle}
+			/>
+			<br />
 		</div>
 	);
 }

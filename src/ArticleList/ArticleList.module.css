@@ -1,0 +1,7 @@
+.list {
+    border: 1px dotted black;
+    border-radius: 15px;
+    box-shadow: 0px 0px 20px red;
+    background-color: #a6a4a1;
+    padding: 0px 20px 0px 20px;
+}
