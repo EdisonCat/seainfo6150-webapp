@@ -1,0 +1,8 @@
+.articleimage {
+    border: 8px #c00 solid;
+    border-radius: 50%;
+    width: 130px;
+    height: 90px;
+    box-shadow: 0px 10px 8px 0px rgba(0,0,0,0.6);
+    margin-bottom: 20px;
+}
